@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Persona5APIv3.Models.PersonaEntity>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4 heading">
+        <span class="heading-main">Welcome</span>
+        <span class="heading-sub">Find your favorite Personas</span>
+    </h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="persona-box">
+    <div class="persona-list">
+        @foreach (var persona in Model) {
+            <h2>@Html.DisplayFor(modelItem => persona.Name)</h2>
+        }
+    </div>
+</div>
