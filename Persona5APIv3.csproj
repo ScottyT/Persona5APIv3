@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.357" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -15,5 +16,16 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.3" />
   </ItemGroup>
+
+  <Target Name="Install NPM modules" BeforeTargets="Build" Inputs="package-lock.json" Outputs="node_modules/.install-stamp">
+    <Exec Command="npm ci" Condition="'$(OS)' != 'Windows_NT'" />
+    <Exec Command="npm install" Condition="'$(OS)' == 'Windows_NT'" />
+    <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="Compile SCSS" BeforeTargets="CopyFilesToPublishDirectory">
+    <Exec Command="npm run build:css" />
+    <Copy SourceFiles="$(ProjectDir)wwwroot/css/site.css" DestinationFolder="$(PublishDir)wwwroot/css" />
+  </Target>
 
 </Project>

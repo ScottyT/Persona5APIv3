@@ -24,7 +24,10 @@ public class GenericRepo<TEntity> : IGenericRepo<TEntity>, IDisposable where TEn
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        if (_personaContext != null)
+        {
+            _personaContext.Dispose();
+        }
     }
 
     public async Task<IEnumerable<TEntity>> GetAll()

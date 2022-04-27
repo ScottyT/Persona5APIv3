@@ -16,14 +16,15 @@ public static class SeedData
                 return;
             }
 
-            context.PersonaEntities.AddRange(
+            context.PersonaEntities.Add(
                 new PersonaEntity
                 {
                     Id = 1,
                     Arcana = "Fool",
                     Description = "The starting persona.",
                     Level = 1,
-                    Name = "Arsene"
+                    Name = "Arsene",
+                    Stats = new PersonaStatsEntity()
                 }
             );
             context.SaveChanges();
