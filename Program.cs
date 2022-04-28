@@ -16,10 +16,12 @@ builder.Services.AddControllersWithViews();
 /* builder.Services.AddDbContext<PersonaContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("PersonaContext"))); */
 builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
-/* builder.Services.AddHostedService(sp => new NpmWatchHostedService(
+/* #if DEBUG
+builder.Services.AddHostedService(sp => new NpmWatchHostedService(
     enabled: sp.GetRequiredService<IWebHostEnvironment>().IsDevelopment(),
     logger: sp.GetRequiredService<ILogger<NpmWatchHostedService>>()
-)); */
+));
+#endif */
 builder.Services.AddWebOptimizer(pipeline =>
         {
             /* pipeline.AddCssBundle("/wwwroot/css/bundle.css", "/wwwroot/css/site.css", "/wwwroot/lib/bootstrap/css/bootstrap.css");
