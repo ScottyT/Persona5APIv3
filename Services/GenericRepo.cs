@@ -5,14 +5,15 @@ using Persona5APIv3.Interface;
 
 namespace Persona5APIv3.Services;
 
-public class GenericRepo<TEntity> : IGenericRepo<TEntity>, IDisposable where TEntity : class, new()
+public class GenericRepo<TEntity> : IGenericRepo<TEntity> where TEntity : class
 {
-    private readonly PersonasDbContext _personaContext;
-    private readonly IMapper _mapper;
-    public GenericRepo(PersonasDbContext personaContext, IMapper mapper)
+    internal PersonasDbContext _personaContext;
+    internal DbSet<TEntity> dbSet;
+    //private readonly IMapper _mapper;
+    public GenericRepo(PersonasDbContext personaContext)
     {
-        _personaContext = personaContext;
-        _mapper = mapper;
+        this._personaContext = personaContext;
+        this.dbSet = personaContext.Set<TEntity>();
     }
 
     public Task Create(TEntity entity)
@@ -25,23 +26,26 @@ public class GenericRepo<TEntity> : IGenericRepo<TEntity>, IDisposable where TEn
         throw new NotImplementedException();
     }
 
-    public void Dispose()
-    {
-        if (_personaContext != null)
-        {
-            _personaContext.Dispose();
-        }
-    }
-
-    public async Task<IEnumerable<TEntity>> GetAll()
+    public virtual async Task<IEnumerable<TEntity>> GetAll()
     {
         return await _personaContext.Set<TEntity>().ToListAsync();
         //throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<TEntity>> GetAllIncluding(Expression<Func<TEntity, object>>[] includeProperties)
+    public virtual async Task<IEnumerable<TEntity>> GetAllIncluding(
+        Expression<Func<TEntity, bool>> filter, string includedProperties = "")
     {
-        throw new NotImplementedException();
+        IQueryable<TEntity> query = dbSet;
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+
+        foreach (var prop in includedProperties.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+        {
+            query = query.Include(prop);
+        }
+        return await query.ToListAsync();
     }
 
     public TEntity GetById(int id)

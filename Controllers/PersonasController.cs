@@ -23,8 +23,7 @@ namespace Persona5APIv3.Controllers
         // GET: Personas
         public async Task<IActionResult> Index()
         {
-            /* var personas = await _persona.GetAll();
-            var personaDTO = personas.Select(e => _mapper.Map<PersonaEntity, PersonaDTO>(e)).ToList(); */
+            //var personas = await _persona.GetAllIncluding<PersonaEntity>(x => x.Stats);
             return View(await _context.PersonaEntities.Include(x => x.Stats).ToListAsync());
         }
 

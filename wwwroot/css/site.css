@@ -175,7 +175,8 @@ a.btn:focus {
 
 .random-persona {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   padding: 30px;
 }
 .random-persona p {
@@ -187,6 +188,7 @@ a.btn:focus {
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.21);
   overflow: auto;
   color: white;
+  width: 400px;
   background-color: #5a5a5a;
 }
 .random-persona .persona-box .section-row {

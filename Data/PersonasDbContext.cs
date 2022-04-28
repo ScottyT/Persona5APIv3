@@ -19,11 +19,11 @@ using Persona5APIv3.Models;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PersonaEntity>()
+            /* modelBuilder.Entity<PersonaEntity>()
                 .HasOne(a => a.Stats)
                 .WithOne(b => b.Persona)
-                .HasForeignKey<PersonaStatsEntity>(b => b.PersonaRef);
+                .HasForeignKey<PersonaStatsEntity>(b => b.PersonaRef); */
+            modelBuilder.Entity<PersonaEntity>().ToTable("PersonaEntity");
             modelBuilder.Entity<PersonaStatsEntity>().ToTable("PersonaStats");
-            
         }
     }

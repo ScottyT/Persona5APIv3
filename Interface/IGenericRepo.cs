@@ -6,7 +6,9 @@ namespace Persona5APIv3.Interface;
 public interface IGenericRepo<TEntity>
 {
     Task<IEnumerable<TEntity>> GetAll();
-    Task<IEnumerable<TEntity>> GetAllIncluding(Expression<Func<TEntity, object>>[] includeProperties);
+    Task<IEnumerable<TEntity>> GetAllIncluding(
+        Expression<Func<TEntity, bool>> filter = null,
+        string includedProperties = "");
     TEntity GetById(int id);
     Task Create(TEntity entity);
     Task Update(int id, TEntity entity);

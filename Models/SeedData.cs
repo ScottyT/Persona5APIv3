@@ -27,14 +27,32 @@ public static class SeedData
                     Arcana = "Fool",
                     Description = "The starting persona for Joker in Persona 5.  He is based off the gentlemen thief from a Lupin novel.",
                     Level = 1,
-                    Name = "Arsene"
+                    Name = "Arsene",
+                    Stats = new PersonaStatsEntity
+                    {
+                        Strength = 2,
+                        Magic = 2,
+                        Endurance = 2,
+                        Agility = 3,
+                        Luck = 1,
+                        //PersonaRef = 1
+                    },
                 },
                 new PersonaEntity
                 {
                     Arcana = "Magician",
                     Description = "Description goes here",
                     Level = 2,
-                    Name = "Jack-o'-Lantern"
+                    Name = "Jack-o'-Lantern",
+                    Stats = new PersonaStatsEntity
+                    {
+                        Strength = 2,
+                        Magic = 3,
+                        Endurance = 3,
+                        Agility = 3,
+                        Luck = 2,
+                        //PersonaRef = 2
+                    }
                 }
             );
             context.SaveChanges();
@@ -47,7 +65,7 @@ public static class SeedData
                     Endurance = 2,
                     Agility = 3,
                     Luck = 1,
-                    PersonaRef = 1
+                    //PersonaRef = 1
                 },
                 new PersonaStatsEntity
                 {
@@ -56,7 +74,7 @@ public static class SeedData
                     Endurance = 3,
                     Agility = 3,
                     Luck = 2,
-                    PersonaRef = 2
+                    //PersonaRef = 2
                 }
             );
             context.SaveChanges();

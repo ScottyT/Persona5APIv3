@@ -14,6 +14,7 @@ public class PersonaStatsEntity
     public int Endurance { get; set; }
     public int Agility { get; set; }
     public int Luck { get; set; }
-    public int PersonaRef {get; set;}
-    public PersonaEntity? Persona {get; set;}
+    //For Foreign key stuff
+    /* public int PersonaRef {get; set;}
+    public PersonaEntity? Persona {get; set;} */
 }

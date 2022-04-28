@@ -4,22 +4,31 @@ using Persona5APIv3.Interface;
 using Persona5APIv3.Models;
 using Persona5APIv3.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Persona5APIv3.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var env = builder.Environment;
+// Might use this later
+/* if (env.IsProduction())
+{
+    builder.Services.AddDbContext<PersonaProdDbContext>();
+}
+else
+{
+    builder.Services.AddDbContext<PersonasDbContext>(options =>
+        options.UseSqlite(builder.Configuration.GetConnectionString("PersonasDbContext") ?? throw new InvalidOperationException("Connection string 'PersonasDbContext' not found.")));
+} */
 builder.Services.AddDbContext<PersonasDbContext>(options =>
-
     options.UseSqlite(builder.Configuration.GetConnectionString("PersonasDbContext") ?? throw new InvalidOperationException("Connection string 'PersonasDbContext' not found.")));
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
-/* #if DEBUG
+#if DEBUG
 builder.Services.AddHostedService(sp => new NpmWatchHostedService(
     enabled: sp.GetRequiredService<IWebHostEnvironment>().IsDevelopment(),
     logger: sp.GetRequiredService<ILogger<NpmWatchHostedService>>()
 ));
-#endif */
+#endif
 builder.Services.AddWebOptimizer(pipeline =>
         {
             /* pipeline.AddCssBundle("/wwwroot/css/bundle.css", "/wwwroot/css/site.css", "/wwwroot/lib/bootstrap/css/bootstrap.css");
