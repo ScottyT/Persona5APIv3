@@ -7,24 +7,31 @@ public static class SeedData
 {
     public static void Initialize(IServiceProvider serviceProvider)
     {
-        using(var context = new PersonaContext(
-            serviceProvider.GetRequiredService<DbContextOptions<PersonaContext>>()
+        using(var context = new PersonasDbContext(
+            serviceProvider.GetRequiredService<DbContextOptions<PersonasDbContext>>()
         ))
         {
-            if (context.PersonaEntities.Any())
+            if (context.PersonaEntity.Any())
             {
                 return;
             }
 
-            context.PersonaEntities.Add(
+            context.PersonaEntity.Add(
                 new PersonaEntity
                 {
-                    Id = 1,
                     Arcana = "Fool",
-                    Description = "The starting persona.",
+                    Description = "The starting persona for Joker in Persona 5.  He is based off the gentlemen thief from a Lupin novel.",
                     Level = 1,
                     Name = "Arsene",
-                    Stats = new PersonaStatsEntity()
+                    Stats = new PersonaStatsEntity
+                    {
+                        Id = 1,
+                        Strength = 2,
+                        Magic = 2,
+                        Endurance = 2,
+                        Agility = 3,
+                        Luck = 1
+                    }
                 }
             );
             context.SaveChanges();

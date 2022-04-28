@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Persona5APIv3.Models.PersonaEntity>
+﻿@using System.Reflection
+@model IEnumerable<Persona5APIv3.Models.PersonaEntity>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -13,11 +14,45 @@
     </div>
 </div>
 
-
-<div class="persona-box">
+<div class="container">
     <div class="persona-list">
         @foreach (var persona in Model) {
-            <h2>@Html.DisplayFor(modelItem => persona.Name)</h2>
+            <div class="persona-box">
+                <h2>@persona.Name</h2>
+                <p class="description">@persona.Description</p>
+                <div class="section-row">
+                    <div class="section col-4">
+                        <div class="info-wrapper">
+                            <p class="info-name">Arcana</p>
+                            <p class="info-data">@persona.Arcana</p>
+                        </div>
+                    </div>
+                    <div class="section col-2">
+                        <div class="info-wrapper">
+                            <p class="info-name">Level</p>
+                            <p class="info-data">@persona.Level</p>
+                        </div>
+                    </div>
+                    <div class="section col-6">
+                        <div class="stats">
+                            <div class="statname">
+                                <p>Strength</p>
+                                <p>Magic</p>
+                                <p>Endurance</p>
+                                <p>Agility</p>
+                                <p>Luck</p>
+                            </div>
+                            <div class="stat">
+                                @foreach (PropertyInfo stat in persona.Stats.GetType().GetProperties())
+                                {
+                                    <p>@stat</p>
+                                    <progress max="100" value="">@stat%</progress>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
     </div>
 </div>

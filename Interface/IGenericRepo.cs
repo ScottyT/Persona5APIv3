@@ -3,7 +3,7 @@ using Persona5APIv3.Interface;
 
 namespace Persona5APIv3.Interface;
 
-public interface IGenericRepo<TEntity> where TEntity : class, IEntity
+public interface IGenericRepo<TEntity> where TEntity : class, new()
 {
     Task<IEnumerable<TEntity>> GetAll();
     Task<IEnumerable<TEntity>> GetAllIncluding(Expression<Func<TEntity, object>>[] includeProperties);

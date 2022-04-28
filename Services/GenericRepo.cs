@@ -4,10 +4,10 @@ using Persona5APIv3.Interface;
 
 namespace Persona5APIv3.Services;
 
-public class GenericRepo<TEntity> : IGenericRepo<TEntity>, IDisposable where TEntity : class, IEntity
+public class GenericRepo<TEntity> : IGenericRepo<TEntity> where TEntity : class, new()
 {
-    private readonly PersonaContext _personaContext;
-    public GenericRepo(PersonaContext personaContext)
+    private readonly PersonasDbContext _personaContext;
+    public GenericRepo(PersonasDbContext personaContext)
     {
         _personaContext = personaContext;
     }
@@ -22,17 +22,18 @@ public class GenericRepo<TEntity> : IGenericRepo<TEntity>, IDisposable where TEn
         throw new NotImplementedException();
     }
 
-    public void Dispose()
+    /* public void Dispose()
     {
         if (_personaContext != null)
         {
             _personaContext.Dispose();
         }
-    }
+    } */
 
     public async Task<IEnumerable<TEntity>> GetAll()
     {
         return await _personaContext.Set<TEntity>().ToListAsync();
+        //throw new NotImplementedException();
     }
 
     public Task<IEnumerable<TEntity>> GetAllIncluding(Expression<Func<TEntity, object>>[] includeProperties)
