@@ -11,12 +11,12 @@ public static class SeedData
             serviceProvider.GetRequiredService<DbContextOptions<PersonasDbContext>>()
         ))
         {
-            if (context.PersonaEntity.Any())
+            if (context.PersonaEntities.Any())
             {
                 return;
             }
 
-            context.PersonaEntity.Add(
+            context.PersonaEntities.Add(
                 new PersonaEntity
                 {
                     Arcana = "Fool",
@@ -25,7 +25,6 @@ public static class SeedData
                     Name = "Arsene",
                     Stats = new PersonaStatsEntity
                     {
-                        Id = 1,
                         Strength = 2,
                         Magic = 2,
                         Endurance = 2,

@@ -15,7 +15,7 @@
 </div>
 
 <div class="container">
-    <div class="persona-list">
+    <div class="persona-list random-persona">
         @foreach (var persona in Model) {
             <div class="persona-box">
                 <h2>@persona.Name</h2>
@@ -43,11 +43,16 @@
                                 <p>Luck</p>
                             </div>
                             <div class="stat">
-                                @foreach (PropertyInfo stat in persona.Stats.GetType().GetProperties())
+                                <p>@Html.DisplayFor(modelItem => persona.Stats.Strength)</p>
+                                <p>@Html.DisplayFor(modelItem => persona.Stats.Magic)</p>
+                                <p>@Html.DisplayFor(modelItem => persona.Stats.Endurance)</p>
+                                <p>@Html.DisplayFor(modelItem => persona.Stats.Agility)</p>
+                                <p>@Html.DisplayFor(modelItem => persona.Stats.Luck)</p>
+                               @*  @foreach (PropertyInfo stat in persona.Stats.GetType().GetProperties())
                                 {
                                     <p>@stat</p>
                                     <progress max="100" value="">@stat%</progress>
-                                }
+                                } *@
                             </div>
                         </div>
                     </div>

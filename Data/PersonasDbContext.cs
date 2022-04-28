@@ -11,9 +11,10 @@ using Persona5APIv3.Models;
         public PersonasDbContext (DbContextOptions<PersonasDbContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
-        public DbSet<Persona5APIv3.Models.PersonaEntity> PersonaEntity { get; set; }
+        public DbSet<PersonaEntity> PersonaEntities { get; set; }
         public DbSet<PersonaStatsEntity> PersonaStats {get; set;}
 
         /* protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -22,7 +22,7 @@ namespace Persona5APIv3.Controllers
         // GET: Personas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PersonaEntity.Include(x => x.Stats).ToListAsync());
+            return View(await _context.PersonaEntities.Include(x => x.Stats).ToListAsync());
         }
 
         // GET: Personas/Details/5
@@ -33,7 +33,7 @@ namespace Persona5APIv3.Controllers
                 return NotFound();
             }
 
-            var personaEntity = await _context.PersonaEntity
+            var personaEntity = await _context.PersonaEntities
                 .FirstOrDefaultAsync(m => m.PersonaID == id);
             if (personaEntity == null)
             {
@@ -73,7 +73,7 @@ namespace Persona5APIv3.Controllers
                 return NotFound();
             }
 
-            var personaEntity = await _context.PersonaEntity.FindAsync(id);
+            var personaEntity = await _context.PersonaEntities.FindAsync(id);
             if (personaEntity == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace Persona5APIv3.Controllers
                 return NotFound();
             }
 
-            var personaEntity = await _context.PersonaEntity
+            var personaEntity = await _context.PersonaEntities
                 .FirstOrDefaultAsync(m => m.PersonaID == id);
             if (personaEntity == null)
             {
@@ -139,15 +139,15 @@ namespace Persona5APIv3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var personaEntity = await _context.PersonaEntity.FindAsync(id);
-            _context.PersonaEntity.Remove(personaEntity);
+            var personaEntity = await _context.PersonaEntities.FindAsync(id);
+            _context.PersonaEntities.Remove(personaEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PersonaEntityExists(int id)
         {
-            return _context.PersonaEntity.Any(e => e.PersonaID == id);
+            return _context.PersonaEntities.Any(e => e.PersonaID == id);
         }
     }
 }

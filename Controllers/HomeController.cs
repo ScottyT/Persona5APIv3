@@ -23,7 +23,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         //return View(await _persona.GetAll());
-        return View(await _context.PersonaEntity.ToListAsync());
+        return View(await _context.PersonaEntities.Include(x => x.Stats).ToListAsync());
     }
 
     public IActionResult Privacy()
