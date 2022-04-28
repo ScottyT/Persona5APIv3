@@ -1,11 +1,8 @@
 #nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Persona5APIv3.Interface;
 using Persona5APIv3.Models;
 
 namespace Persona5APIv3.Controllers
@@ -13,15 +10,21 @@ namespace Persona5APIv3.Controllers
     public class PersonasController : Controller
     {
         private readonly PersonasDbContext _context;
+        private readonly IMapper _mapper;
+        private readonly IGenericRepo<PersonaEntity> _persona;
 
-        public PersonasController(PersonasDbContext context)
+        public PersonasController(PersonasDbContext context, IGenericRepo<PersonaEntity> persona, IMapper mapper)
         {
             _context = context;
+            _persona = persona;
+            _mapper = mapper;
         }
 
         // GET: Personas
         public async Task<IActionResult> Index()
         {
+            /* var personas = await _persona.GetAll();
+            var personaDTO = personas.Select(e => _mapper.Map<PersonaEntity, PersonaDTO>(e)).ToList(); */
             return View(await _context.PersonaEntities.Include(x => x.Stats).ToListAsync());
         }
 

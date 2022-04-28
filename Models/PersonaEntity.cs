@@ -11,6 +11,5 @@ public class PersonaEntity
     public int Level { get; set; }
     public string? Arcana { get; set; }
     public string? Description { get; set; }
-
-    public PersonaStatsEntity Stats { get; set; } = new PersonaStatsEntity();
+    public PersonaStatsEntity? Stats { get; set; }
 }

@@ -13,8 +13,6 @@ builder.Services.AddDbContext<PersonasDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-/* builder.Services.AddDbContext<PersonaContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("PersonaContext"))); */
 builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
 /* #if DEBUG
 builder.Services.AddHostedService(sp => new NpmWatchHostedService(
@@ -29,6 +27,7 @@ builder.Services.AddWebOptimizer(pipeline =>
             pipeline.MinifyCssFiles();
             pipeline.MinifyJsFiles();
         });
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

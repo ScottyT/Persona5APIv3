@@ -1,15 +1,18 @@
 using System.Linq.Expressions;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Persona5APIv3.Interface;
 
 namespace Persona5APIv3.Services;
 
-public class GenericRepo<TEntity> : IGenericRepo<TEntity> where TEntity : class, new()
+public class GenericRepo<TEntity> : IGenericRepo<TEntity>, IDisposable where TEntity : class, new()
 {
     private readonly PersonasDbContext _personaContext;
-    public GenericRepo(PersonasDbContext personaContext)
+    private readonly IMapper _mapper;
+    public GenericRepo(PersonasDbContext personaContext, IMapper mapper)
     {
         _personaContext = personaContext;
+        _mapper = mapper;
     }
 
     public Task Create(TEntity entity)
@@ -22,13 +25,13 @@ public class GenericRepo<TEntity> : IGenericRepo<TEntity> where TEntity : class,
         throw new NotImplementedException();
     }
 
-    /* public void Dispose()
+    public void Dispose()
     {
         if (_personaContext != null)
         {
             _personaContext.Dispose();
         }
-    } */
+    }
 
     public async Task<IEnumerable<TEntity>> GetAll()
     {

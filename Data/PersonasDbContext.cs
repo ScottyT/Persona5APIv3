@@ -11,16 +11,19 @@ using Persona5APIv3.Models;
         public PersonasDbContext (DbContextOptions<PersonasDbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            
         }
 
         public DbSet<PersonaEntity> PersonaEntities { get; set; }
         public DbSet<PersonaStatsEntity> PersonaStats {get; set;}
 
-        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PersonaEntity>().ToTable("PersonaEntity");
+            modelBuilder.Entity<PersonaEntity>()
+                .HasOne(a => a.Stats)
+                .WithOne(b => b.Persona)
+                .HasForeignKey<PersonaStatsEntity>(b => b.PersonaRef);
             modelBuilder.Entity<PersonaStatsEntity>().ToTable("PersonaStats");
             
-        } */
+        }
     }
