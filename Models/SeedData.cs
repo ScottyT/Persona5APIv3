@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Persona5APIv3.Data;
 using Persona5APIv3.Services;
 
 namespace Persona5APIv3.Models;
@@ -13,10 +14,6 @@ public static class SeedData
         {
             context.Database.EnsureCreated();
             if (context.PersonaEntities.Any())
-            {
-                return;
-            }
-            if (context.PersonaStats.Any())
             {
                 return;
             }
@@ -53,28 +50,6 @@ public static class SeedData
                         Luck = 2,
                         //PersonaRef = 2
                     }
-                }
-            );
-            context.SaveChanges();
-
-            context.PersonaStats.AddRange(
-                new PersonaStatsEntity
-                {
-                    Strength = 2,
-                    Magic = 2,
-                    Endurance = 2,
-                    Agility = 3,
-                    Luck = 1,
-                    //PersonaRef = 1
-                },
-                new PersonaStatsEntity
-                {
-                    Strength = 2,
-                    Magic = 3,
-                    Endurance = 3,
-                    Agility = 3,
-                    Luck = 2,
-                    //PersonaRef = 2
                 }
             );
             context.SaveChanges();

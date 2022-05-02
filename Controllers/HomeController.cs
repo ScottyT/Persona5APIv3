@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System.Linq.Expressions;
 using Persona5APIv3.Services;
+using Persona5APIv3.Data;
 
 namespace Persona5APIv3.Controllers;
 

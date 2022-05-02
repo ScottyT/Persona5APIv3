@@ -23,12 +23,12 @@ builder.Services.AddDbContext<PersonasDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
-#if DEBUG
+/* #if DEBUG
 builder.Services.AddHostedService(sp => new NpmWatchHostedService(
     enabled: sp.GetRequiredService<IWebHostEnvironment>().IsDevelopment(),
     logger: sp.GetRequiredService<ILogger<NpmWatchHostedService>>()
 ));
-#endif
+#endif */
 builder.Services.AddWebOptimizer(pipeline =>
         {
             /* pipeline.AddCssBundle("/wwwroot/css/bundle.css", "/wwwroot/css/site.css", "/wwwroot/lib/bootstrap/css/bootstrap.css");

@@ -2,6 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Persona5APIv3.Data;
 using Persona5APIv3.Interface;
 using Persona5APIv3.Models;
 
@@ -56,7 +57,7 @@ namespace Persona5APIv3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonaID,Name,Level,Arcana,Description")] PersonaEntity personaEntity)
+        public async Task<IActionResult> Create([Bind("PersonaID,Name,Level,Arcana,Description,Stats")] PersonaEntity personaEntity)
         {
             if (ModelState.IsValid)
             {
